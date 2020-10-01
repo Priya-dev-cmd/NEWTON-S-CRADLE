@@ -7,23 +7,7 @@ const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 const Render = Matter.Render;
 const Constraint=Matter.Constraint;
-function preload()
-{
-	
-}
 
-function setup() {
-	createCanvas(800, 800);
-
-
-	engine = Engine.create();
-	world = engine.world;
-
-	//Create the Bodies Here.
-
-	Engine.run(engine);
-  
-}
 
 
 function setup() {
@@ -86,14 +70,25 @@ function draw() {
   bobObject3.display();
   bobObject4.display();
   bobObject5.display();
- 
   
-  
-	
-  
- 
-  
-  
- 
 }
 
+function keyPressed() {
+	if (keyCode === UP_ARROW) {
+
+	  Matter.Body.applyForce(bobObject1.body,bobObject1.body.position,{x:-50,y:-45});
+
+	}
+}
+
+function drawLine(constraint)
+{
+	bobBodyPosition=constraint.bodyA.position
+	roofBodyPosition=constraint.bodyB.position
+
+	roofBodyOffset=constraint.pointB;
+	
+	roofBodyX=roofBodyPosition.x+roofBodyOffset.x
+	roofBodyY=roofBodyPosition.y+roofBodyOffset.y
+	line(bobBodyPosition.x, bobBodyPosition.y, roofBodyX,roofBodyY);
+}
